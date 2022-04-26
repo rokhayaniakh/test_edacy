@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="input-group">
+    <div class="form-outline">
+      <input
+        class="form-control"
+        type="search"
+        name="id"
+        [(ngModel)]="id"
+        (ngModelChange)="search()"
+      />
+      <label class="form-label" for="form1">Search</label>
+    </div>
+  </div>
+  <table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+          <th>Title</th>
+          <th>description</th>
+          <th>link</th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr
+      *ngFor="
+        let post of listpost">
+      <td>
+        {{ post?.title }}
+      </td>
+      <td>{{ post?.description}}</td>
+      <td>{{ post?.link}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <button
+          class="btn btn-primary"
+          [disabled]="curPage == 1"
+          (click)="curPage = curPage - 1">
+          PREV
+        </button>
+      </li>
+      <li class="page-item">Page {{ curPage }} of {{ numberOfPages() }}</li>
+      <li class="page-item">
+        <button
+          class="btn btn-primary"
+          [disabled]="curPage >= listpost.slice(0, 50).length / pageSize"
+          (click)="curPage = curPage + 1">
+          NEXT
+        </button>
+      </li>
+    </ul>
+  </nav>
+</div>
